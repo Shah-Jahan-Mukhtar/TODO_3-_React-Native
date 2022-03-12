@@ -29,27 +29,26 @@ export default function App() {
   };
 
   const handleUpdateTask = () => {
-    setTaskItems([...taskItems]);
-    setUpdate(update);
+    const upd = [...taskItems];
+
+    setUpdate(upd);
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.taskWrapper}>
-        <Text style={styles.sectionTitle}>Today's tasks</Text>
+        <Text style={styles.sectionTitle}>Today's Tasks</Text>
         <View style={styles.items}>
           {taskItems.map((item, index) => {
             return (
-              <TouchableOpacity key={index} onPress={() => handleUpdateTask()}>
-                {/* // <Icon name="delete" size={25} color="red" /> */}
+              <TouchableOpacity key={index} onPress={() => completeTask(index)}>
+                <Icon name="delete" size={25} color="red" />
                 <Task text={item} />
-                //
               </TouchableOpacity>
             );
           })}
         </View>
       </View>
-
       <KeyboardAvoidingView
         // behavior={Plateform.OS === "ios" ? "padding" : "height"}
         style={styles.writeTaskWrapper}
@@ -66,14 +65,8 @@ export default function App() {
           </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => handleUpdateTask()}>
-          <View style={styles.addWrapper}>
+          <View style={styles.UpdateWrapper}>
             <Text style={styles.addText}>Update</Text>
-          </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => completeTask()}>
-          <View style={styles.addWrapper}>
-            <Text style={styles.addText}>Delete</Text>
           </View>
         </TouchableOpacity>
       </KeyboardAvoidingView>
@@ -120,6 +113,17 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     backgroundColor: "lime",
+    borderRadius: 60,
+    justifyContent: "center",
+    alignItems: "center",
+    // borderColor: "#C0C0C0",
+    // borderWidth: 1,
+    elevation: 5,
+  },
+  UpdateWrapper: {
+    width: 60,
+    height: 60,
+    backgroundColor: "magenta",
     borderRadius: 60,
     justifyContent: "center",
     alignItems: "center",
